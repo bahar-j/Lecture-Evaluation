@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'update' post.id %}" method="POST">
+        {% csrf_token %}
+        <h1>새 강의평 쓰기</h1>
+        수업명 : <input type="text" name="title" value={{post.lecture.title}}></input>
+        <h4>코멘트 작성</h4>
+        <textarea cols="50" rows="20" name='body'>{{post.body}}</textarea>
+        <br>
+        <h4>점수 입력</h4>
+        <input type="number" name="rating" value={{post.rating}}>
+        <br>
+        <br>
+        <input class="btn" type="submit" value="강의평 제출">
+    </form>
+</body>
+</html>

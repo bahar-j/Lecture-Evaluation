@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="top bar"></div>
+    <!-- 버튼 누르면 views의 search 함수 call -->
+    <form name="form1" method="POST" action="{%url 'search'%}">
+        {% csrf_token %} 
+        <div class="searchbar">
+            <table>
+                <tr>
+                    <th>년도/학기</th>
+                    <th>
+                        <select name="year">
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select name="semester" >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th>전공/부전공/교양</th>
+                    <th><select name="dept">
+                            {% for dept in deptList %}
+                            <option value="{{dept}}">{{dept}}</option>
+                            {% endfor %}
+                        </select></th>
+                </tr>
+            </table>
+        </div>
+        <div class="searchbtn">
+            <input class="btn" type="submit" value="조회">
+        </div>
+    </form>
+    <!-- isTable이 true면 테이블 보여줌 -->
+    {%if isTable %}
+    <div class="classtable">
+        <table>
+            <tr>
+                <th>개설영역</th>
+                <th>년도</th>
+                <th>학수번호</th>
+                <th>교과목명</th>
+                <th>학기</th>
+                <th>전공</th>
+                <th>담당교수</th>
+                <th>학점</th>
+                <th>시간</th>
+            </tr>
+            {% for lecture in searchList %}
+            <tr>
+                <th>{{lecture.area}}</th>
+                <th>{{lecture.rq_year}}</th>
+                <th>{{lecture.instruction_number}}</th>
+                <th><a href="{% url 'detail' lecture.id %}">{{lecture.title}}</a></th>
+                <th>{{lecture.rq_semester}}</th>
+                <th>{{lecture.department}}</th>
+                <th>{{lecture.professor}}</th>
+                <th>{{lecture.credit}}</th>
+                <th>{{lecture.time}}</th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</body>
+
+</html>

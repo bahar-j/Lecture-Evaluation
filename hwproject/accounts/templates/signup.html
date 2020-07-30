@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+</head>
+<body>
+    <div class="d_container">
+        <div class="div_box">
+            <h1>Sign Up!</h1>
+
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                Username:
+                <br>
+                <input type=button style="WIDTH: 110pt; HEIGHT: 15pt" name="username" type="text" value="">
+                <br>
+                Password:
+                <br>
+                <input style="WIDTH: 110pt; HEIGHT: 15pt" name="password1" type="password" value="">
+                <br>
+                Confirm Password:
+                <br>
+                <input style="WIDTH: 110pt; HEIGHT: 15pt" name="password2" type="password" value="">
+                <br>
+                <br>
+                <input style="WIDTH: 60pt; HEIGHT: 19pt" class="btn btn-primary" type="submit" value="Sign Up!">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+body {
+    background: url('/static/me.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.d_container{
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.div_box{
+    width: 600px;
+    height: 300px;
+    background: ghostwhite;
+    color: black;
+    top: 50%;
+    left: 60%;
+    margin: 45% -45%;
+    border-radius: 10px;
+}
+
+.div_box h1{
+    margin: 30px;
+    padding-top: 2ex;
+}

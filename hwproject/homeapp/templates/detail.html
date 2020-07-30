@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="detail.css"/>
+</head>
+<body>
+    <div class="title">{{selected_lecture.title}}</div>
+    교수명: <span class="professor">{{selected_lecture.professor}}</span><br>
+    <br>
+
+    <br>
+    <div class="evaluation">
+        {% for posts in postsList %}
+        강의평: <span>{{posts.body}}</span><br>
+        평점: <span>{{posts.rating}}</span><br>
+        작성자: <span>{{posts.writer}}</span><br>
+        <a href="{% url 'update' posts.id %}"><input type="button" value="업데이트"/></a>
+        <a href="{% url 'delete' posts.id %}"><input type="button" value="삭제하기"/></a>
+        <br>
+        {% endfor %}
+        <br>
+    </div>
+
+    <a href="{%url 'new' selected_lecture.id %}">강의평 작성</a>
+</body>
+</html>
