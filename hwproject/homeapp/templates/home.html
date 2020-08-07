@@ -17,18 +17,18 @@
                 <tr>
                     <th>년도/학기</th>
                     <th>
-                        <select name="year">
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
+                        <select name="year" id="year">
+                            <option value="20">2020</option>
+                            <option value="19">2019</option>
+                            <option value="18">2018</option>
+                            <option value="17">2017</option>
+                            <option value="16">2016</option>
+                            <option value="15">2015</option>
+                            <option value="14">2014</option>
                         </select>
                     </th>
                     <th>
-                        <select name="semester" >
+                        <select name="semester" id="semester">
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>전공/부전공/교양</th>
-                    <th><select name="dept">
+                    <th><select name="dept" id="dept">
                             {% for dept in deptList %}
                             <option value="{{dept}}">{{dept}}</option>
                             {% endfor %}
@@ -79,6 +79,33 @@
         </table>
     </div>
     {% endif %}
+    <script type="text/javascript">
+        var year = "{{year}}";
+        var semester = "{{semester}}";
+        var dept = "{{dept}}";
+        console.log(year, semester, dept)
+
+        if ( year == "" ){
+            document.getElementById('year').value= 20;
+        }
+        else {
+            document.getElementById('year').value= year;
+        }
+
+        if ( semester == "" ){
+            document.getElementById('semester').value= 1;
+        }
+        else {
+            document.getElementById('semester').value= semester;
+        }
+
+        if ( dept == "" ){
+            document.getElementById('dept').value= "AI융합전공";
+        }
+        else {
+            document.getElementById('dept').value= dept;
+        }
+    </script>
 </body>
 
 </html>

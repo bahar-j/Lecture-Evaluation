@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="detail.css"/>
 </head>
 <body>
+    <script type="text/javascript">
+        var already_written = [];
+    </script>
     <div class="title">{{selected_lecture.title}}</div>
     교수명: <span class="professor">{{selected_lecture.professor}}</span><br>
+    평점: <span id="rating_mean"></span><br>
     <br>
 
     <br>
@@ -17,13 +21,51 @@
         강의평: <span>{{posts.body}}</span><br>
         평점: <span>{{posts.rating}}</span><br>
         작성자: <span>{{posts.writer}}</span><br>
-        <a href="{% url 'update' posts.id %}"><input type="button" value="업데이트"/></a>
-        <a href="{% url 'delete' posts.id %}"><input type="button" value="삭제하기"/></a>
+        <script type="text/javascript">
+            var writer = "{{posts.writer}}";
+
+            already_written.push(writer);
+            // console.log(already_written);
+        </script>
+        <a href="{% url 'update' posts.id %}" onclick="isUser('{{posts.writer}}');"><input type="button" value="업데이트"/></a>
+        <a href="{% url 'delete' posts.id %}" onclick="isUser('{{posts.writer}}');"><input type="button" value="삭제하기"/></a>
         <br>
         {% endfor %}
         <br>
+
+        <!-- {{selected_lecture.rating_sum}}<br>
+        {{selected_lecture.rating_num}} -->
     </div>
 
-    <a href="{%url 'new' selected_lecture.id %}">강의평 작성</a>
+    <a href="{%url 'new' selected_lecture.id %}" onclick="canWrite();">강의평 작성</a>
+
+    <script type="text/javascript">
+        var rating_mean = "{{selected_lecture.rating_sum}}"/"{{selected_lecture.rating_num}}";
+        var logged_user = "{{logged_user}}";
+        // console.log(writer);
+
+        if(isNaN(rating_mean)){
+            document.getElementById("rating_mean").innerHTML = 0;
+        }
+        else {
+            document.getElementById("rating_mean").innerHTML = rating_mean.toFixed(1);
+        }
+
+        function canWrite(){
+            if ( already_written.includes(logged_user) ){
+                alert('이미 글을 작성하셨습니다');
+                event.preventDefault();
+            }
+        }
+
+        function isUser(writer){
+            if ( logged_user !== writer ){
+                alert('작성자가 아닙니다');
+                event.preventDefault();
+            }
+
+        }
+
+    </script>
 </body>
 </html>

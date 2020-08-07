@@ -11,11 +11,13 @@ class Lecture(models.Model):
     title = models.CharField(max_length=50)
     credit = models.IntegerField()
     time = models.IntegerField()
-
+    rating_sum = models.FloatField(default=0)
+    rating_num = models.IntegerField(default=0)
     def __str__(self):
         return self.title
+        
 class Post(models.Model):
     lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE)
     body = models.TextField()
-    rating = models.IntegerField()
+    rating = models.FloatField()
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
