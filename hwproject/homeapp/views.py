@@ -88,19 +88,21 @@ def create(request, id):
 
 def update(request, id):
     post = Post.objects.get(id=id)
-    post.lecture.rating_sum -= float(post.rating)
-    post.lecture.save()
 
     if ( request.method == "POST" ):
         post.writer = request.user
         post.lecture = Lecture.objects.get(id=post.lecture.id)
         post.body = request.POST['body']
-        post.lecture.rating_sum += float(post.rating) # POST일 경우 if문 전으로 가서 한 번 더 빼주기 때문에 여기서 다시 더해줌
+        # post.lecture.rating_sum += float(post.rating) # POST일 경우 if문 전으로 가서 한 번 더 빼주기 때문에 여기서 다시 더해줌
         post.rating = request.POST['rating']
         post.lecture.rating_sum += float(request.POST['rating'])
         post.save()
         post.lecture.save()
         return redirect('detail' , post.lecture.id)
+    # GET 방식인 경우에만 동작
+    else:
+        post.lecture.rating_sum -= float(post.rating)
+        post.lecture.save()
 
     return render(request, 'update.html', {'post' : post})
 

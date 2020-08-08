@@ -53,14 +53,14 @@
 
         function canWrite(){
             if ( already_written.includes(logged_user) ){
-                alert('이미 글을 작성하셨습니다');
+                alert('이미 글을 작성하셨습니다.');
                 event.preventDefault();
             }
         }
 
         function isUser(writer){
             if ( logged_user !== writer ){
-                alert('작성자가 아닙니다');
+                alert('작성자와 일치하지 않습니다.');
                 event.preventDefault();
             }
 
